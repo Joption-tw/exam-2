@@ -2,510 +2,750 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <title>歐大選擇權教室 | Joption Academy</title>
-
-    <meta property="og:title" content="歐大選擇權教室" />
-    <meta property="og:description" content="專業的選擇權教育與策略模擬平台，從基礎入門到實戰交易體系。" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.joption.com.tw/" />
-    <meta property="og:image" content="https://www.joption.com.tw/IP標籤.jpg" />
-    <meta property="og:site_name" content="Joption" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>稟軒會考衝刺首頁 - SAI 應試覺醒 V14.6</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & Babel -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Cropper.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@500;700;900&display=swap');
         
-        :root {
-            --forest-deep: #1b4332;
-            --forest-mid: #2d6a4f;
-            --sage-light: #f7f9f4;
-            --amber-accent: #d97706;
-        }
-
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; 
-            background-color: var(--sage-light);
-        }
-
-        body { 
-            font-family: 'M PLUS Rounded 1c', 'Noto Sans TC', sans-serif; 
-            -webkit-tap-highlight-color: transparent;
-            color: #292524;
-        }
-
-        /* 動畫效果 */
-        .animate-fade-in { 
-            animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
-            opacity: 0;
-        }
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(15px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-
-        .submenu-enter { 
-            max-height: 0; 
-            overflow: hidden; 
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; 
-            opacity: 0;
-        }
-        .submenu-open { 
-            max-height: 1500px; 
-            opacity: 1;
-        }
-
-        /* 滾動條美化 */
-        ::-webkit-scrollbar { width: 5px; height: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 10px; }
+        body { margin: 0; padding: 0; overflow-x: hidden; font-family: 'Noto Sans TC', sans-serif; background: #FDFBF7; scroll-behavior: smooth; }
+        .vibrant-bg { background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%); position: relative; min-height: 100vh; }
+        .go-board-overlay { position: fixed; inset: 0; background-image: linear-gradient(#8b4513 0.5px, transparent 0.5px), linear-gradient(90deg, #8b4513 0.5px, transparent 0.5px); background-size: 40px 40px; opacity: 0.1; pointer-events: none; z-index: 0; }
         
-        /* 漸層與陰影 */
-        .forest-gradient {
-            background: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%);
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .scroll-container {
-            flex: 1;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-        }
-
-        .iframe-container {
-            width: 100%;
-            height: 100%;
-            flex: 1;
-            overflow: hidden; 
-            position: relative;
-        }
+        .glass-card { background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.5); }
         
-        .iframe-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
+        .tag-國文 { background: #ef4444; color: white; }
+        .tag-英文 { background: #3b82f6; color: white; }
+        .tag-數學 { background: #f59e0b; color: white; }
+        .tag-自然 { background: #10b981; color: white; }
+        .tag-社會 { background: #8b5cf6; color: white; }
+        .tag-其他 { background: #6b7280; color: white; }
+
+        .loading-overlay { position: fixed; inset: 0; background: #2D2D2D; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #4b0082; border-top: 4px solid #ffd700; border-radius: 50%; animation: spin 1s linear infinite; }
+        
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .btn-spinner { animation: spin 1s linear infinite; }
+        
+        .custom-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake { animation: shake 0.5s both; }
+
+        .mom-quote-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
+            border-left: 6px solid #fb7185;
+            transition: all 0.3s ease;
+        }
+        .mom-quote-card:active { transform: scale(0.98); }
+
+        .modal-blur {
+            backdrop-filter: blur(8px);
+            background-color: rgba(0, 0, 0, 0.6);
         }
 
-        /* 按鈕高級感 */
-        .btn-premium {
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-premium:active {
-            transform: scale(0.96);
-        }
+        /* 輪盤動畫 */
+        .wheel-transition { transition: transform 4s cubic-bezier(0.15, 0, 0.15, 1); }
 
-        .btn-amber {
-            background: linear-gradient(to bottom right, #fbbf24, #d97706);
-            box-shadow: 0 4px 15px -2px rgba(217, 119, 6, 0.3);
-        }
+        /* 刮刮樂 Canvas 樣式 */
+        .scratch-container { position: relative; width: 280px; height: 150px; cursor: crosshair; }
+        .scratch-prize { position: absolute; inset: 0; display: flex; items-center: center; justify-center: center; font-weight: 900; background: #fff; border-radius: 12px; }
+        .scratch-canvas { position: absolute; inset: 0; border-radius: 12px; }
 
-        .visitor-badge {
-            padding: 8px 16px;
-            border-radius: 99px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(4px);
+        /* 抽籤晃動 */
+        @keyframes shake-box {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            50% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+            100% { transform: rotate(0deg); }
         }
-
-        /* 針對行動裝置的 iframe 高度調整 */
-        @media (max-width: 768px) {
-            .iframe-container {
-                height: calc(100dvh - 64px); /* 扣除 Header 高度 */
-            }
-        }
+        .animate-shake-box { animation: shake-box 0.3s infinite; }
+        .fade-message { animation: fadeIn 0.8s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body>
-    <div id="root" class="h-full"></div>
+<body class="vibrant-bg">
+    <div id="root"></div>
 
-    <script type="module">
+    <script type="text/babel" data-type="module">
+        const { useState, useEffect, useMemo, useCallback, useRef } = React;
+
+        const myFirebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "AIzaSyAo6qGtng1z3SAn86wMrtFKLkVmPPCEVSU",
+            authDomain: "exam-8ae8d.firebaseapp.com",
+            projectId: "exam-8ae8d",
+            storageBucket: "exam-8ae8d.firebasestorage.app",
+            messagingSenderId: "988791791039",
+            appId: "1:988791791039:web:acd9437a7b4a546bafd50a",
+            measurementId: "G-TD30PX25GY"
+        };
+
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, onSnapshot, increment, serverTimestamp, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, where, serverTimestamp, setDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-        window.FirebaseSDK = { initializeApp, getAuth, signInAnonymously, onAuthStateChanged, getFirestore, doc, setDoc, onSnapshot, increment, serverTimestamp, getAnalytics, collection };
-    </script>
+        const app = initializeApp(myFirebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'exam-8ae8d';
+        const apiKey = ""; 
 
-    <script type="text/babel">
-        const { useState, useEffect, useMemo, useRef } = React;
+        const SUBJECTS = ["國文", "英文", "數學", "自然", "社會", "其他"];
+        const PRIZES = [1, 2, 3, 5, 10, 2, 8, 1]; 
 
-        const Icons = {
-            Home: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>,
-            Book: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>,
-            Target: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>,
-            TrendingUp: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>,
-            Shield: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>,
-            Zap: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>,
-            Code: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>,
-            ChevronDown: () => <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path></svg>,
-            Menu: () => <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>,
-            X: () => <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>,
-            ClipboardCheck: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>,
-            Leaf: () => <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 11a9 9 0 019 9M4 11a9 9 0 019-9m-9 9l9 9m0-18l-9 9"></path></svg>,
-            ArrowRight: () => <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>,
-            Users: () => <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>,
-            Clock: () => <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        const Icon = ({ name, size = 20, className = "" }) => {
+            useEffect(() => { if (window.lucide) window.lucide.createIcons(); }, [name]);
+            return (
+                <span className={`inline-flex items-center justify-center ${className}`} style={{ width: size, height: size }}>
+                    <i data-lucide={name} style={{ width: size, height: size }}></i>
+                </span>
+            );
+        };
+
+        const TimeUnit = ({ label, value }) => (
+            <div className="flex-1">
+                <div className="bg-stone-800 rounded sm:rounded-xl border border-amber-500/80 shadow-lg px-1.5 py-1 sm:px-2.5 sm:py-2 flex items-baseline justify-center gap-0.5 sm:gap-1">
+                    <span className="text-lg sm:text-4xl font-black tabular-nums text-amber-400 leading-none">
+                        {String(value).padStart(2, '0')}
+                    </span>
+                    <span className="text-[9px] sm:text-sm font-black text-amber-200/40 uppercase tracking-tighter">{label}</span>
+                </div>
+            </div>
+        );
+
+        const ScratchCard = ({ onWin }) => {
+            const canvasRef = useRef(null);
+            const [prize] = useState(() => Math.floor(Math.random() * 10) + 1);
+            const [isFinished, setIsFinished] = useState(false);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#A0A0A0';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.strokeStyle = '#808080';
+                ctx.lineWidth = 1;
+                for(let i=0; i<20; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(Math.random()*canvas.width, Math.random()*canvas.height);
+                    ctx.lineTo(Math.random()*canvas.width, Math.random()*canvas.height);
+                    ctx.stroke();
+                }
+            }, []);
+
+            const handleScratch = (e) => {
+                if (isFinished) return;
+                const canvas = canvasRef.current;
+                const ctx = canvas.getContext('2d');
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+                const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 15, 0, Math.PI * 2);
+                ctx.fill();
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                let clearPixels = 0;
+                for (let i = 3; i < imageData.data.length; i += 4) { if (imageData.data[i] === 0) clearPixels++; }
+                if (clearPixels > imageData.data.length / 4 * 0.5) {
+                    setIsFinished(true);
+                    onWin(prize);
+                }
+            };
+
+            return (
+                <div className="scratch-container mx-auto bg-stone-100 rounded-xl overflow-hidden border-2 border-stone-200 shadow-inner">
+                    <div className="scratch-prize text-3xl text-rose-600 italic"><span className="text-sm mr-1">獎學金</span>${prize}</div>
+                    <canvas ref={canvasRef} width={280} height={150} className="scratch-canvas" onMouseMove={handleScratch} onTouchMove={handleScratch} />
+                </div>
+            );
         };
 
         const App = () => {
-            const [activeChapterId, setActiveChapterId] = useState('home');
-            const [activeSubIndex, setActiveSubIndex] = useState(null);
-            const [isMenuOpen, setIsMenuOpen] = useState(false);
-            const [visitorStats, setVisitorStats] = useState({ total: null, daily: null });
+            const [user, setUser] = useState(null);
             
-            const hasIncrementedRef = useRef(false);
-            const scrollRef = useRef(null);
+            // --- 雲端狀態取代本地狀態 ---
+            const [nickname, setNickname] = useState("");
+            const [scholarship, setScholarship] = useState(0);
+            const [gameChances, setGameChances] = useState(0);
+            const [statsLoaded, setStatsLoaded] = useState(false); // 確保雲端讀取完成
+            
+            const [tasks, setTasks] = useState([]); 
+            const [isLoading, setIsLoading] = useState(true);
+            const [isSubmitting, setIsSubmitting] = useState(false);
+            const [viewMode, setViewMode] = useState("active"); 
+            const [inputMode, setInputMode] = useState("photo"); 
+            const [selectedSubject, setSelectedSubject] = useState("全部");
+            const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
+            
+            const [showGameCenter, setShowGameCenter] = useState(false);
+            const [activeGame, setActiveGame] = useState("wheel");
+            const [isSpinning, setIsSpinning] = useState(false);
+            const [wheelRotation, setWheelRotation] = useState(0);
+            const [isShaking, setIsShaking] = useState(false);
+            const [lastPrize, setLastPrize] = useState(null);
 
-            // Firebase Logic
+            const [aiMessage, setAiMessage] = useState(null);
+            const [activeExamTask, setActiveExamTask] = useState(null); 
+            const [deleteTarget, setDeleteTarget] = useState(null);
+            const [isDeleting, setIsDeleting] = useState(false);
+            const [croppingImage, setCroppingImage] = useState(null); 
+            const [isProcessingCrop, setIsProcessingCrop] = useState(false); 
+            const [isPreCompressing, setIsPreCompressing] = useState(false);
+            const cropperRef = useRef(null);
+            const cropperImgRef = useRef(null);
+            const [showWebcam, setShowWebcam] = useState(false);
+            const videoRef = useRef(null);
+            const streamRef = useRef(null);
+            const [shakingItems, setShakingItems] = useState([]);
+            const [momMessage, setMomMessage] = useState("稟軒，這一步是通往夢想的神之一手。加油！");
+            const [isMessageLoading, setIsMessageLoading] = useState(false);
+
+            const [newTask, setNewTask] = useState("");
+            const [newDate, setNewDate] = useState(new Date().toISOString().split('T')[0]);
+            const [newCategory, setNewCategory] = useState("國文");
+            const [previewList, setPreviewList] = useState([]); 
+            const fileInputRef = useRef(null);
+
+            const targetDate = useMemo(() => new Date('2026-05-16T00:00:00'), []);
+            const todayStr = useMemo(() => new Date().toISOString().split('T')[0], []);
+
+            // 1. 初始化 Auth (嚴格執行在 useEffect 空陣列中)
             useEffect(() => {
-                let unsubscribeAuth, unsubscribeTotal, unsubscribeDaily;
-                const initFirebase = async () => {
-                    if (!window.FirebaseSDK) { setTimeout(initFirebase, 200); return; }
-                    const { initializeApp, getAuth, signInAnonymously, onAuthStateChanged, getFirestore, doc, setDoc, onSnapshot, increment, serverTimestamp, collection } = window.FirebaseSDK;
+                const initAuth = async () => {
                     try {
-                        const firebaseConfig = {
-                            apiKey: "AIzaSyAkr2zItSSI9Saon6QikeUqGF_ufypXXYw",
-                            authDomain: "fir-console-9e02e.firebaseapp.com",
-                            projectId: "fir-console-9e02e",
-                            storageBucket: "fir-console-9e02e.firebasestorage.app",
-                            messagingSenderId: "652108941349",
-                            appId: "1:652108941349:web:ac058f3f692e841e7c97cc"
-                        };
-                        const app = initializeApp(firebaseConfig);
-                        const auth = getAuth(app);
-                        const db = getFirestore(app);
-                        const appId = 'fir-console-9e02e'; 
-                        const now = new Date();
-                        const taiwanTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Taipei"}));
-                        const dateKey = `${taiwanTime.getFullYear()}${String(taiwanTime.getMonth() + 1).padStart(2, '0')}${String(taiwanTime.getDate()).padStart(2, '0')}`;
-
-                        await signInAnonymously(auth);
-                        unsubscribeAuth = onAuthStateChanged(auth, async (u) => {
-                            if (!u) return;
-                            const statsCol = collection(db, 'artifacts', appId, 'public', 'data', 'analytics');
-                            const totalDocRef = doc(statsCol, 'totalStats');
-                            const dailyDocRef = doc(statsCol, `daily_${dateKey}`);
-                            
-                            if (!hasIncrementedRef.current) {
-                                hasIncrementedRef.current = true;
-                                try {
-                                    await Promise.all([
-                                        setDoc(totalDocRef, { count: increment(1), lastUpdated: serverTimestamp() }, { merge: true }),
-                                        setDoc(dailyDocRef, { count: increment(1), lastUpdated: serverTimestamp() }, { merge: true })
-                                    ]);
-                                } catch (e) {}
-                            }
-                            unsubscribeTotal = onSnapshot(totalDocRef, (s) => setVisitorStats(p => ({ ...p, total: s.data()?.count || 0 })));
-                            unsubscribeDaily = onSnapshot(dailyDocRef, (s) => setVisitorStats(p => ({ ...p, daily: s.data()?.count || 0 })));
-                        });
-                    } catch (e) {}
+                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                            await signInWithCustomToken(auth, __initial_auth_token);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                    } catch (e) {
+                        console.error("登入失敗:", e);
+                    }
                 };
-                initFirebase();
-                return () => { unsubscribeAuth?.(); unsubscribeTotal?.(); unsubscribeDaily?.(); };
+                initAuth();
+                const unsubscribe = onAuthStateChanged(auth, setUser);
+                return () => unsubscribe();
             }, []);
 
-            const chapters = useMemo(() => [
-                {
-                    id: 'ch1', title: 'CH 1 選擇權入門', icon: <Icons.Book />, testUrl: 'chap1-test.html',
-                    subpages: [
-                        { title: '什麼是選擇權？', url: './1-1.html' },
-                        { title: '權利與義務的對稱性', url: './1-2.html' },
-                        { title: '買方與賣方的獲利概率', url: './1-3.html' }
-                    ]
-                },
-                {
-                    id: 'ch2', title: 'CH 2 基礎知識', icon: <Icons.Target />, testUrl: 'chap2-test.html',
-                    subpages: [
-                        { title: '履約價與權利金', url: './2-1.html' },
-                        { title: '價內、價平與價外', url: './2-2.html' },
-                        { title: '結算機制與到期效應', url: './2-3.html' },
-                        { title: '保證金與權利金', url: './2-4.html' },
-                        { title: '結算日', url: './2-5.html' }
-                    ]
-                },
-                {
-                    id: 'ch3', title: 'CH 3 權利金的秘密', icon: <Icons.Zap />, testUrl: 'chap3-test.html',
-                    subpages: [
-                        { title: '內涵價值 vs 時間價值', url: './3-1.html' },
-                        { title: '時間價值的流逝規律', url: './3-2.html' }
-                    ]
-                },
-                {
-                    id: 'ch4', title: 'CH 4 希臘字母實戰力', icon: <Icons.TrendingUp />, testUrl: 'chap4-test.html',
-                    subpages: [
-                        { title: 'Delta：方向敏感度', url: './4-1.html' },
-                        { title: 'Gamma：Delta 的加速度', url: './4-2.html' },
-                        { title: 'Theta：時間衰減', url: './4-3.html' },
-                        { title: 'Vega：波動率敏感度', url: './4-4.html' }
-                    ]
-                },
-                {
-                    id: 'ch5', title: 'CH 5 選擇權九九乘法', icon: <Icons.Zap />, testUrl: 'chap5-test.html',
-                    subpages: [
-                        { title: '買進買權 (Long Call)', url: './5-1.html' },
-                        { title: '賣出買權 (Short Call)', url: './5-2.html' },
-                        { title: '買進賣權 (Long Put)', url: './5-3.html' },
-                        { title: '賣出賣權 (Short Put)', url: './5-4.html' },
-                        { title: '雙賣組合 (Short Strangle)', url: './5-5.html' },
-                        { title: '雙買組合 (Long Strangle)', url: './5-6.html' },
-                        { title: '多頭價差 (Bull Spread)', url: './5-7.html' },
-                        { title: '空頭價差 (Bear Spread)', url: './5-8.html' },
-                        { title: '鐵禿鷹組合 (Iron Condor)', url: './5-9.html' },
-                        { title: '鐵蝴蝶組合 (Iron Butterfly)', url: './5-10.html' }
-                    ]
-                },
-                {
-                    id: 'ch6', title: 'CH 6 常見問題集', icon: <Icons.Shield />, testUrl: 'chap6-test.html',
-                    subpages: [
-                        { title: '保證金計算', url: './6-1.html' },
-                        { title: '歐式與美式選擇權', url: './6-2.html' },
-                        { title: '新手一定要知道的 10 個地雷', url: './6-3.html' },
-                        { title: '新手必須知道的知識', url: './6-4.html' }
-                    ]
-                },
-                {
-                    id: 'ch7', title: '進階 : Joption 量化', icon: <Icons.Code />, testUrl: 'chap7-test.html',
-                    subpages: [
-                        { title: 'Joption 是什麼', url: 'https://www.joption.com.tw/%E9%81%B8%E5%96%AE/joption%E6%98%AF%E4%BB%80%E9%BA%BC' },
-                        { title: '雙賣平衡模擬器', url: './7-2.html' },
-                        { title: 'Joption 策略核心', url: 'https://www.joption.com.tw/%E9%81%B8%E5%96%AE/joption%E7%AD%96%E7%95%A5%E6%A0%B8%E5%BF%83' },
-                        { title: '訂閱與下載', url: 'https://www.joption.com.tw/%E9%81%B8%E5%96%AE/%E4%B8%8B%E8%BC%89%E5%8F%8A%E5%AE%89%E8%A3%9D%E8%AA%AA%E6%98%8E' },
-                        { title: '歐大的自我介紹', url: 'https://www.joption.com.tw/%E9%81%B8%E5%96%AE/%E6%AD%90%E5%A4%A7%E7%9A%84%E8%87%AA%E6%88%91%E4%BB%8B%E7%B4%B9' }
-                    ]
+            // 2. 登入後同步雲端資料 (任務清單 + 個人獎學金)
+            useEffect(() => {
+                if (!user) return;
+
+                // 訂閱公共任務清單
+                const qTasks = query(collection(db, 'artifacts', appId, 'public', 'data', 'tasks'));
+                const unsubTasks = onSnapshot(qTasks, (snap) => {
+                    setTasks(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                    setIsLoading(false);
+                }, (err) => console.error("任務讀取錯誤:", err));
+
+                // 訂閱私人獎學金與次數
+                const statsRef = doc(db, 'artifacts', appId, 'users', user.uid, 'settings', 'profile');
+                const unsubStats = onSnapshot(statsRef, (snap) => {
+                    if (snap.exists()) {
+                        const data = snap.data();
+                        setNickname(data.nickname || "");
+                        setScholarship(data.scholarship || 0);
+                        setGameChances(data.gameChances || 0);
+                        setStatsLoaded(true);
+                    } else {
+                        // 第一次建立雲端檔案，順便繼承舊的 localStorage
+                        const savedNickname = localStorage.getItem('sai_nickname');
+                        const p = ["進藤", "藤原", "塔矢", "SAI", "本因坊", "神之", "應試"];
+                        const n = ["稟軒", "大師", "覺醒", "棋聖", "國手", "佐為"];
+                        const rName = p[Math.floor(Math.random()*p.length)] + n[Math.floor(Math.random()*n.length)];
+                        
+                        const initialNickname = savedNickname || rName;
+                        const initialScholarship = parseInt(localStorage.getItem('sai_money')) || 0;
+                        const initialChances = parseInt(localStorage.getItem('sai_chances')) || 0;
+
+                        setDoc(statsRef, {
+                            nickname: initialNickname,
+                            scholarship: initialScholarship,
+                            gameChances: initialChances,
+                            createdAt: serverTimestamp()
+                        }).then(() => setStatsLoaded(true));
+                    }
+                }, (err) => console.error("狀態讀取錯誤:", err));
+
+                return () => { unsubTasks(); unsubStats(); };
+            }, [user]);
+
+            // 監聽中獎訊息，3秒後自動消失
+            useEffect(() => {
+                if (lastPrize !== null) {
+                    const timer = setTimeout(() => setLastPrize(null), 3000);
+                    return () => clearTimeout(timer);
                 }
-            ], []);
+            }, [lastPrize]);
 
-            const currentChapter = useMemo(() => chapters.find(c => c.id === activeChapterId), [activeChapterId, chapters]);
+            // 倒數計時
+            useEffect(() => {
+                const timer = setInterval(() => {
+                    const diff = targetDate - new Date();
+                    if (diff <= 0) setTimeLeft({ d: 0, h: 0, m: 0, s: 0 });
+                    else setTimeLeft({ d: Math.floor(diff / 86400000), h: Math.floor((diff / 3600000) % 24), m: Math.floor((diff / 60000) % 60), s: Math.floor((diff / 1000) % 60) });
+                }, 1000);
+                return () => clearInterval(timer);
+            }, [targetDate]);
 
-            const handleChapterSelect = (id) => {
-                setActiveChapterId(id);
-                setActiveSubIndex(null);
+            // AI 語句
+            const fetchMomMessage = async (retryCount = 0) => {
+                if (retryCount === 0) { if (isMessageLoading) return; setIsMessageLoading(true); }
+                try {
+                    const systemPrompt = "你是稟軒的媽媽，佐為。請生成一句全新的、溫馨、勵志且具有圍棋精神的話來鼓勵稟軒面對國中會考。字數控制在15-25字內。";
+                    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                    const response = await fetch(url, { 
+                        method: 'POST', 
+                        headers: { 'Content-Type': 'application/json' }, 
+                        body: JSON.stringify({ contents: [{ parts: [{ text: "現在給我一句鼓勵的話。" }] }], systemInstruction: { parts: [{ text: systemPrompt }] } }) 
+                    });
+                    if (!response.ok) throw new Error();
+                    const data = await response.json();
+                    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (text) setMomMessage(text.trim());
+                } catch (err) {
+                    if (retryCount < 5) { setTimeout(() => fetchMomMessage(retryCount + 1), Math.pow(2, retryCount) * 1000); return; }
+                    setMomMessage("稟軒，不論遇到什麼困難，媽媽永遠支持你，全力衝刺吧！");
+                } finally { if (retryCount === 0 || retryCount >= 5) setIsMessageLoading(false); }
             };
 
-            const handleSubPageClick = (index) => {
-                const targetUrl = index === 'test' ? currentChapter?.testUrl : currentChapter?.subpages[index].url;
-                if (targetUrl && targetUrl.startsWith('http')) {
-                    window.open(targetUrl, '_blank');
-                    return;
-                }
-                setActiveSubIndex(index);
-                if (window.innerWidth < 768) setIsMenuOpen(false);
-                if (scrollRef.current) scrollRef.current.scrollTop = 0;
+            useEffect(() => { fetchMomMessage(); }, [viewMode]);
+
+            // --- 核心更新：將獎勵寫入雲端 ---
+            const grantChance = async () => {
+                if (!user) return;
+                setGameChances(prev => prev + 1); // 畫面先更新
+                setAiMessage({ text: "答對了！獲得一次遊戲機會！", status: 'correct' });
+                setTimeout(() => setAiMessage(null), 2000);
+                
+                // 雲端安全累加
+                const statsRef = doc(db, 'artifacts', appId, 'users', user.uid, 'settings', 'profile');
+                await updateDoc(statsRef, { gameChances: increment(1) });
             };
 
-            const LogoImage = ({ className }) => (
-                <img 
-                    src="IP標籤.jpg" 
-                    alt="Logo" 
-                    className={className} 
-                    onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "https://www.joption.com.tw/IP%E6%A8%99%E7%B1%A4.jpg";
-                    }}
-                />
-            );
+            const applyGameResult = async (prize) => {
+                if (!user) return;
+                setScholarship(prev => prev + prize);
+                setGameChances(prev => prev - 1);
+                setLastPrize(prize);
+                
+                // 雲端安全結算
+                const statsRef = doc(db, 'artifacts', appId, 'users', user.uid, 'settings', 'profile');
+                await updateDoc(statsRef, { 
+                    scholarship: increment(prize),
+                    gameChances: increment(-1) 
+                });
+            };
+
+            // 任務操作
+            const addTask = async (e) => {
+                e.preventDefault();
+                if (inputMode === 'photo') {
+                    const invalidItems = previewList.filter(item => item.qType === 'choice' && !item.answer);
+                    if (invalidItems.length > 0) { setShakingItems(invalidItems.map(i => i.id)); setTimeout(() => setShakingItems([]), 600); return; }
+                } else if (!newTask.trim()) return;
+                
+                setIsSubmitting(true);
+                const itemsToUpload = [...previewList];
+                const content = newTask; const date = newDate; const category = newCategory;
+                setPreviewList([]); setNewTask("");
+                try {
+                    if (inputMode === 'photo') {
+                        await Promise.all(itemsToUpload.map(item => addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'tasks'), { 
+                            type: 'photo', questionType: item.qType, content: "", date, category, imageUrl: item.dataUrl, correctAnswer: item.answer, 
+                            completed: false, wasIncorrect: false, status: 'active', createdAt: serverTimestamp(), attempts: 0
+                        })));
+                    } else {
+                        await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'tasks'), { 
+                            type: 'text', content, date, category, completed: false, wasIncorrect: false, status: 'active', createdAt: serverTimestamp(), attempts: 0 
+                        });
+                    }
+                } finally { setIsSubmitting(false); }
+            };
+
+            const handleDelete = async () => {
+                if (!deleteTarget || isDeleting) return;
+                setIsDeleting(true);
+                try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'tasks', deleteTarget)); } 
+                finally { setIsDeleting(false); setDeleteTarget(null); }
+            };
+
+            const cycleTaskCategory = async (task) => {
+                const cur = SUBJECTS.indexOf(task.category || "其他");
+                const next = SUBJECTS[(cur + 1) % SUBJECTS.length];
+                await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'tasks', task.id), { category: next });
+            };
+
+            const handleTextDone = async (task) => {
+                await grantChance(); // 先給予獎勵
+                await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'tasks', task.id), { completed: true, status: 'archived', completedAt: serverTimestamp(), attempts: (task.attempts || 0) + 1 }); 
+            };
+
+            const submitAnswer = async (task, inputAnswer) => {
+                const correctAns = (task.correctAnswer || "").trim().toUpperCase();
+                const newAttempts = (task.attempts || 0) + 1;
+                if (inputAnswer.trim().toUpperCase() === correctAns) {
+                    await grantChance(); // 先給予獎勵
+                    await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'tasks', task.id), { completed: true, status: 'archived', completedAt: serverTimestamp(), attempts: newAttempts }); 
+                    setActiveExamTask(null);
+                } else {
+                    setAiMessage({ text: "不通！", status: 'wrong' });
+                    await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'tasks', task.id), { wasIncorrect: true, status: 'needsReview', attempts: newAttempts });
+                    setTimeout(() => setAiMessage(null), 800);
+                }
+            };
+
+            // 圖片處理
+            const handleFileSelect = async (e) => {
+                const file = e.target.files[0]; if (!file) return;
+                setIsPreCompressing(true);
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 1600; let w = img.width, h = img.height;
+                        if (w > MAX_WIDTH) { h = Math.round((h * MAX_WIDTH) / w); w = MAX_WIDTH; }
+                        canvas.width = w; canvas.height = h;
+                        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                        setCroppingImage(canvas.toDataURL('image/jpeg', 0.9));
+                        setIsPreCompressing(false);
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file); e.target.value = "";
+            };
+
+            const startWebcam = async () => {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                    streamRef.current = stream; setShowWebcam(true);
+                    setTimeout(() => { if (videoRef.current) videoRef.current.srcObject = stream; }, 100);
+                } catch (err) { alert("無法存取相機"); }
+            };
+
+            const capturePhoto = () => {
+                const video = videoRef.current;
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth > 1600 ? 1600 : video.videoWidth;
+                canvas.height = (canvas.width * video.videoHeight) / video.videoWidth;
+                canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                if (streamRef.current) streamRef.current.getTracks().forEach(t => t.stop());
+                setShowWebcam(false); setCroppingImage(dataUrl); 
+            };
+
+            const finalizeCrop = () => {
+                if (isProcessingCrop || !cropperRef.current) return;
+                setIsProcessingCrop(true);
+                setTimeout(() => {
+                    const canvas = cropperRef.current.getCroppedCanvas({ maxWidth: 1600, maxHeight: 1600 });
+                    setPreviewList(prev => [...prev, { id: Math.random().toString(36).substr(2, 9), dataUrl: canvas.toDataURL('image/jpeg', 0.8), qType: 'choice', answer: null }]);
+                    if (cropperRef.current) cropperRef.current.destroy();
+                    cropperRef.current = null; setCroppingImage(null); setIsProcessingCrop(false);
+                }, 50);
+            };
+
+            // 遊戲中心操作
+            const openGameCenter = () => {
+                setLastPrize(null);
+                setShowGameCenter(true);
+            };
+
+            const playWheel = () => {
+                if (gameChances <= 0 || isSpinning) return;
+                setIsSpinning(true); setLastPrize(null);
+                const extra = 5 + Math.floor(Math.random() * 5);
+                const pIdx = Math.floor(Math.random() * PRIZES.length);
+                const newRot = wheelRotation + (extra * 360) + (pIdx * (360/PRIZES.length));
+                setWheelRotation(newRot);
+                setTimeout(() => {
+                    setIsSpinning(false);
+                    const prize = PRIZES[(PRIZES.length - (pIdx % PRIZES.length)) % PRIZES.length];
+                    applyGameResult(prize);
+                }, 4000);
+            };
+
+            const playLots = () => {
+                if (gameChances <= 0 || isShaking) return;
+                setIsShaking(true); setLastPrize(null);
+                setTimeout(() => {
+                    setIsShaking(false);
+                    const prize = Math.floor(Math.random() * 10) + 1;
+                    applyGameResult(prize);
+                }, 1500);
+            };
+
+            const sortedTasks = useMemo(() => {
+                return [...tasks].sort((a, b) => (a.date || "9999-99-99").localeCompare(b.date || "9999-99-99")).map((t, idx) => ({ ...t, globalIndex: idx + 1 }));
+            }, [tasks]);
+
+            const listToDisplay = useMemo(() => {
+                let f = sortedTasks;
+                if (selectedSubject !== "全部") f = f.filter(t => t.category === selectedSubject);
+                if (viewMode === 'active') return f.filter(t => !t.completed && (t.date || "9999-99-99") <= todayStr);
+                if (viewMode === 'future') return f.filter(t => (t.date || "9999-99-99") > todayStr);
+                return f.filter(t => t.completed).reverse().slice(0, 20);
+            }, [sortedTasks, viewMode, todayStr, selectedSubject]);
+
+            const counts = useMemo(() => ({
+                active: sortedTasks.filter(t => !t.completed && (t.date || "9999-99-99") <= todayStr).length,
+                future: sortedTasks.filter(t => (t.date || "9999-99-99") > todayStr).length,
+                history: sortedTasks.filter(t => t.completed).length
+            }), [sortedTasks, todayStr]);
+
+            // 安全防護：確保雲端資料載入完畢才顯示畫面，避免覆蓋或閃爍
+            if (!user || isLoading || !statsLoaded) return <div className="loading-overlay"><div className="spinner"></div></div>;
 
             return (
-                <div className="h-full flex flex-col md:flex-row bg-[#f7f9f4] overflow-hidden">
-                    {/* 側邊欄導航 */}
-                    <aside className={`fixed inset-y-0 left-0 z-50 w-[280px] lg:w-[320px] bg-[#fffcf5] border-r border-stone-200 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'} md:relative md:translate-x-0 md:sticky md:top-0 md:h-screen flex flex-col`}>
-                        <div className="p-6 md:p-8 flex items-center gap-4 cursor-pointer group" onClick={() => {setActiveChapterId('home'); setActiveSubIndex(null); setIsMenuOpen(false);}}>
-                            <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 overflow-hidden rounded-2xl shadow-lg border-2 border-white group-hover:rotate-3 transition-transform bg-stone-100">
-                                <LogoImage className="w-full h-full object-cover" />
-                            </div>
-                            <div className="flex flex-col min-w-0">
-                                <h2 className="text-lg md:text-xl font-black tracking-tight text-emerald-900 leading-tight truncate">歐大選擇權教室</h2>
-                                <span className="text-[10px] font-bold text-amber-500 uppercase tracking-widest mt-1 flex items-center gap-1"><Icons.Leaf/> JOPTION</span>
+                <div className="min-h-screen relative pb-24 text-[#2D2D2D]">
+                    <div className="go-board-overlay"></div>
+
+                    {/* 刪除確認彈窗 */}
+                    {deleteTarget && (
+                        <div className="fixed inset-0 z-[8000] flex items-center justify-center p-4 modal-blur animate-in fade-in">
+                            <div className="bg-white w-full max-w-sm rounded-2xl shadow-2xl border border-stone-200 overflow-hidden">
+                                <div className="p-6 text-center">
+                                    <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4"><Icon name="trash-2" size={32} /></div>
+                                    <h3 className="text-xl font-black mb-2">確定要刪除嗎？</h3>
+                                    <p className="text-stone-500 font-bold text-sm">此操作將無法復原。</p>
+                                </div>
+                                <div className="flex border-t">
+                                    <button onClick={() => setDeleteTarget(null)} className="flex-1 py-4 font-black text-stone-500 hover:bg-stone-50">取消</button>
+                                    <button onClick={handleDelete} className="flex-1 py-4 bg-red-600 text-white font-black hover:bg-red-700">{isDeleting ? <Icon name="loader-2" className="btn-spinner" /> : "確認刪除"}</button>
+                                </div>
                             </div>
                         </div>
+                    )}
 
-                        <nav className="flex-1 px-3 md:px-4 py-2 space-y-2 overflow-y-auto mb-6">
-                            {chapters.map((ch) => (
-                                <div key={ch.id} className="space-y-1">
-                                    <button 
-                                        onClick={() => handleChapterSelect(ch.id)}
-                                        className={`w-full flex items-center justify-between px-4 py-3.5 rounded-2xl transition-all ${activeChapterId === ch.id ? 'bg-emerald-50 text-emerald-800' : 'text-stone-600 hover:bg-stone-50'}`}
-                                    >
-                                        <div className="flex items-center gap-3 truncate">
-                                            <span className={`shrink-0 ${activeChapterId === ch.id ? 'text-emerald-500' : 'text-stone-400'}`}>{ch.icon}</span>
-                                            <span className="font-extrabold text-sm md:text-[15px] truncate">{ch.title}</span>
-                                        </div>
-                                        <div className={`transition-transform shrink-0 ${activeChapterId === ch.id ? 'rotate-180 text-emerald-500' : 'text-stone-300'}`}>
-                                            <Icons.ChevronDown />
-                                        </div>
-                                    </button>
-
-                                    <div className={`submenu-enter ${activeChapterId === ch.id ? 'submenu-open' : ''}`}>
-                                        <div className="pl-10 pr-2 py-1 space-y-1 border-l-2 border-dashed border-emerald-100 ml-6 my-1">
-                                            {ch.subpages.map((sub, sIdx) => (
-                                                <button
-                                                    key={sIdx}
-                                                    onClick={() => handleSubPageClick(sIdx)}
-                                                    className={`w-full text-left py-2 px-3 rounded-xl text-[13px] font-bold transition-all ${activeChapterId === ch.id && activeSubIndex === sIdx ? 'bg-emerald-100 text-emerald-900' : 'text-stone-500 hover:text-emerald-600 hover:bg-emerald-50'}`}
-                                                >
-                                                    {sub.title}
-                                                </button>
-                                            ))}
-                                            {ch.id !== 'ch7' && (
-                                                <button
-                                                    onClick={() => handleSubPageClick('test')}
-                                                    className={`w-full text-left py-2 px-3 rounded-xl text-[13px] font-bold transition-all flex items-center gap-2 mt-1 ${activeChapterId === ch.id && activeSubIndex === 'test' ? 'bg-amber-400 text-amber-900 shadow-sm' : 'text-amber-600 hover:bg-amber-50'}`}
-                                                >
-                                                    <Icons.ClipboardCheck /> 旅途試煉
-                                                </button>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </nav>
-                    </aside>
-
-                    {/* 主要內容區域 */}
-                    <main className="flex-1 flex flex-col h-[100dvh] min-w-0 relative">
-                        {/* 手機版頂欄 */}
-                        <header className="md:hidden flex items-center justify-between px-5 py-3.5 bg-white border-b border-stone-100 shrink-0 z-40 sticky top-0 shadow-sm">
-                            <div className="flex items-center gap-3" onClick={() => setActiveChapterId('home')}>
-                                <div className="w-9 h-9">
-                                    <LogoImage className="w-full h-full rounded-lg object-cover shadow-sm border border-stone-100" />
-                                </div>
-                                <span className="font-black text-emerald-950 text-base tracking-tight truncate">歐大選擇權教室</span>
+                    {/* 相機介面 */}
+                    {showWebcam && (
+                        <div className="fixed inset-0 z-[9000] bg-black flex flex-col items-center justify-center p-4">
+                            <video ref={videoRef} autoPlay playsInline className="w-full max-w-2xl rounded-xl border-4 border-white/20"></video>
+                            <div className="mt-6 flex gap-4 w-full max-w-sm">
+                                <button onClick={() => { if(streamRef.current) streamRef.current.getTracks().forEach(t=>t.stop()); setShowWebcam(false); }} className="flex-1 py-3 bg-white/10 text-white rounded-xl font-bold">取消</button>
+                                <button onClick={capturePhoto} className="flex-2 flex-[2] py-3 bg-amber-500 text-black rounded-xl font-black">立即拍照</button>
                             </div>
-                            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 text-stone-600 bg-stone-50 rounded-xl">
-                                {isMenuOpen ? <Icons.X /> : <Icons.Menu />}
-                            </button>
-                        </header>
+                        </div>
+                    )}
 
-                        <div ref={scrollRef} className="scroll-container bg-[#f7f9f4]">
-                            <div className={`flex-1 flex flex-col ${activeSubIndex !== null ? 'p-0 h-full' : 'p-4 sm:p-6 md:p-10 lg:p-16'}`}>
-                                {activeChapterId === 'home' ? (
-                                    <div key="home" className="animate-fade-in space-y-8 md:space-y-16 max-w-6xl mx-auto w-full pb-10">
-                                        <div className="forest-gradient text-white p-8 sm:p-12 md:p-20 rounded-[2rem] md:rounded-[3.5rem] shadow-2xl relative overflow-hidden">
-                                            <div className="absolute -top-24 -right-24 w-64 h-64 md:w-96 md:h-96 bg-emerald-400 rounded-full blur-[80px] md:blur-[120px] opacity-20"></div>
-                                            <div className="relative z-10 space-y-6 md:space-y-10 text-center md:text-left">
-                                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-emerald-50 text-xs font-bold tracking-widest">
-                                                    <Icons.Leaf /> JOPTION ACADEMY
-                                                </div>
-                                                <h1 className="text-3xl sm:text-4xl md:text-6xl font-black leading-[1.15] tracking-tight">
-                                                    掌握選擇權：<br/><span className="text-amber-300">獲利與風險的平衡魔法</span>
-                                                </h1>
-                                                <p className="text-base md:text-xl text-emerald-100/80 font-medium max-w-2xl mx-auto md:mx-0">
-                                                    從基礎出發，建立您的專業交易體系，讓數據成為您的指南針。
-                                                </p>
-                                                <div className="pt-4">
-                                                    <button onClick={() => setActiveChapterId('ch1')} className="btn-premium btn-amber px-8 md:px-12 py-4 md:py-5 rounded-full font-black text-white flex items-center justify-center gap-3 text-lg md:text-xl mx-auto md:mx-0 group">
-                                                        開始學習之旅 <Icons.ArrowRight />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
+                    {/* 剪裁介面 */}
+                    {croppingImage && (
+                        <div className="fixed inset-0 z-[9100] bg-black/90 flex flex-col items-center justify-center p-4">
+                            <div className="w-full max-w-2xl h-[60vh] bg-stone-900 rounded-lg overflow-hidden mb-4">
+                                <img ref={cropperImgRef} src={croppingImage} onLoad={() => cropperRef.current = new Cropper(cropperImgRef.current, { viewMode: 1 })} className="hidden" />
+                            </div>
+                            <div className="flex gap-4 w-full max-w-md">
+                                <button onClick={() => setCroppingImage(null)} className="flex-1 py-3 bg-white/10 text-white rounded-xl font-bold">取消</button>
+                                <button onClick={finalizeCrop} className="flex-2 flex-[2] py-3 bg-amber-500 text-black rounded-xl font-black">{isProcessingCrop ? "處理中..." : "確認剪裁"}</button>
+                            </div>
+                        </div>
+                    )}
 
-                                        <div className="glass-card p-6 sm:p-10 md:p-14 rounded-[2rem] md:rounded-[3rem] shadow-sm border border-emerald-100/50">
-                                            <div className="space-y-10 md:space-y-14">
-                                                <div className="text-center md:text-left space-y-4">
-                                                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-emerald-950 leading-tight">
-                                                        進入量化交易的世界<br/>
-                                                        <span className="text-emerald-700">Joption 雙賣平衡下單機</span>
-                                                    </h2>
-                                                    <p className="text-stone-500 font-medium text-sm md:text-lg max-w-2xl mx-auto md:mx-0">
-                                                        透過專業量化工具，讓交易更具紀律，專注於長期穩健的獲利邏輯。
-                                                    </p>
-                                                    <a href="https://www.joption.com.tw/" target="_blank" className="btn-premium bg-[#1a2e25] px-8 md:px-10 py-3.5 md:py-4 rounded-full font-bold text-white inline-flex items-center gap-3 text-sm md:text-base mt-4 shadow-xl">
-                                                        前往 Joption 官網 <Icons.ArrowRight />
-                                                    </a>
-                                                </div>
-                                                
-                                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                                                    {[
-                                                        { emoji: "🧐", title: "什麼是 Joption", url: "https://www.joption.com.tw/%E9%81%B8%E5%96%AE/joption%E6%98%AF%E4%BB%80%E9%BA%BC", desc: "開發初衷與核心功能簡介。" },
-                                                        { emoji: "🧠", title: "策略核心邏輯", url: "https://www.joption.com.tw/%E9%81%B8%E5%96%AE/joption%E7%AD%96%E7%95%A5%E6%A0%B8%E5%BF%83", desc: "深入探討量化交易邏輯。" },
-                                                        { emoji: "📥", title: "訂閱與下載", url: "https://www.joption.com.tw/%E9%81%B8%E5%96%AE/%E4%B8%8B%E8%BC%89%E5%8F%8A%E5%AE%89%E8%A3%9D%E8%AA%AA%E6%98%8E", desc: "獲取最新版軟體與安裝說明。" },
-                                                        { emoji: "👨‍🏫", title: "歐大自我介紹", url: "https://www.joption.com.tw/%E9%81%B8%E5%96%AE/%E6%AD%90%E5%A4%A7%E7%9A%84%E8%87%AA%E6%88%91%E4%BB%8B%E7%B4%B9", desc: "多年選擇權實戰經驗分享。" }
-                                                    ].map((item, i) => (
-                                                        <a key={i} href={item.url} target="_blank" className="p-6 bg-white rounded-3xl border border-stone-100 shadow-sm transition-all hover:border-emerald-200 hover:shadow-md hover:-translate-y-1 block group">
-                                                            <div className="text-3xl mb-3 group-hover:scale-110 transition-transform origin-left">{item.emoji}</div>
-                                                            <h4 className="font-black text-emerald-950 mb-1.5 text-base md:text-lg">{item.title}</h4>
-                                                            <p className="text-stone-400 text-[13px] leading-relaxed font-medium">{item.desc}</p>
-                                                        </a>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex flex-col items-center gap-6 pt-6">
-                                            <div className="flex flex-wrap justify-center gap-3">
-                                                <div className="visitor-badge bg-emerald-50 text-emerald-700 border border-emerald-100">
-                                                    <Icons.Users /> 累積：<span className="font-black">{visitorStats.total !== null ? visitorStats.total.toLocaleString() : '...'}</span>
-                                                </div>
-                                                <div className="visitor-badge bg-amber-50 text-amber-700 border border-amber-100">
-                                                    <Icons.Clock /> 今日：<span className="font-black">{visitorStats.daily !== null ? visitorStats.daily.toLocaleString() : '...'}</span>
-                                                </div>
-                                            </div>
-                                            <p className="text-[10px] font-bold text-stone-300 tracking-[0.2em] uppercase">© JOPTION ACADEMY - Since 2026</p>
-                                        </div>
+                    {/* 遊戲中心 Modal */}
+                    {showGameCenter && (
+                        <div className="fixed inset-0 z-[9500] flex items-center justify-center p-4 modal-blur animate-in fade-in">
+                            <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden border-4 border-amber-500 relative">
+                                <button onClick={() => setShowGameCenter(false)} className="absolute top-4 right-4 z-10 p-2 bg-stone-100 rounded-full"><Icon name="x" size={20}/></button>
+                                <div className="bg-amber-500 p-6 text-center text-stone-900">
+                                    <h2 className="text-2xl font-black mb-1">神之遊戲場</h2>
+                                    <div className="flex justify-center gap-4 text-sm font-bold opacity-80">
+                                        <span>次數: {gameChances}</span><span>獎金: ${scholarship}</span>
                                     </div>
-                                ) : (
-                                    <div key={activeChapterId} className={`animate-fade-in flex-1 flex flex-col bg-white overflow-hidden transition-all ${activeSubIndex !== null ? 'h-full shadow-none border-none' : 'rounded-[2rem] md:rounded-[3rem] border-4 border-white shadow-xl min-h-[500px] mb-8'}`}>
-                                        {activeSubIndex === null ? (
-                                            <div className="p-8 md:p-16 flex flex-col items-center flex-1 justify-center relative">
-                                                <div className="mb-4 text-emerald-500 font-extrabold tracking-[0.3em] text-[10px] uppercase bg-emerald-50 px-4 py-1 rounded-full border border-emerald-100">Joption Chapter</div>
-                                                <h2 className="text-2xl md:text-4xl font-black mb-10 text-emerald-950 text-center leading-tight">
-                                                    {(currentChapter?.title || "章節內容")}
-                                                </h2>
-                                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
-                                                    {currentChapter?.subpages.map((sub, i) => (
-                                                        <button key={i} onClick={() => handleSubPageClick(i)} className="group p-5 md:p-6 rounded-3xl border-2 border-stone-50 bg-stone-50/50 hover:bg-emerald-50 hover:border-emerald-200 hover:shadow-lg transition-all text-left flex items-start gap-4">
-                                                            <span className="w-10 h-10 shrink-0 rounded-2xl bg-white text-emerald-600 flex items-center justify-center font-black text-sm border border-stone-100 group-hover:bg-emerald-500 group-hover:text-white transition-all shadow-sm">{i+1}</span>
-                                                            <span className="font-extrabold text-stone-700 text-sm md:text-base pt-2 group-hover:text-emerald-950 leading-snug">{sub.title}</span>
-                                                        </button>
+                                </div>
+                                <div className="p-6">
+                                    <div className="flex gap-2 mb-8 bg-stone-100 p-1 rounded-xl">
+                                        {['wheel', 'lots', 'scratch'].map(g => (
+                                            <button key={g} onClick={() => { setLastPrize(null); setActiveGame(g); }} className={`flex-1 py-2 text-xs font-black rounded-lg ${activeGame===g?'bg-white shadow':'text-stone-400'}`}>
+                                                {g==='wheel'?'輪盤':g==='lots'?'抽籤':'刮刮樂'}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <div className="min-h-[250px] flex flex-col items-center justify-center">
+                                        {activeGame === 'wheel' && (
+                                            <div className="relative w-48 h-48 sm:w-56 sm:h-56">
+                                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10 text-amber-600"><Icon name="chevron-down" size={32} /></div>
+                                                <div className="w-full h-full rounded-full border-8 border-stone-800 shadow-xl relative overflow-hidden wheel-transition"
+                                                    style={{ transform: `rotate(-${wheelRotation}deg)`, background: 'conic-gradient(#ef4444 0 45deg, #3b82f6 45deg 90deg, #f59e0b 90deg 135deg, #10b981 135deg 180deg, #8b5cf6 180deg 225deg, #ec4899 225deg 270deg, #06b6d4 270deg 315deg, #f97316 315deg 360deg)' }}>
+                                                    {PRIZES.map((p, i) => (
+                                                        <div key={i} className="absolute top-0 left-1/2 -translate-x-1/2 h-1/2 origin-bottom font-black text-white py-2 text-sm" style={{ transform: `rotate(${i * 45 + 22.5}deg)` }}>${p}</div>
                                                     ))}
-                                                    {currentChapter?.id !== 'ch7' && currentChapter?.testUrl && (
-                                                        <button onClick={() => handleSubPageClick('test')} className="group p-5 md:p-6 rounded-3xl border-2 border-amber-100 bg-amber-50/30 hover:bg-amber-100 hover:border-amber-300 hover:shadow-lg transition-all text-left flex items-start gap-4">
-                                                            <span className="w-10 h-10 shrink-0 rounded-2xl bg-amber-400 text-amber-950 flex items-center justify-center font-black text-sm shadow-sm group-hover:scale-110 transition-transform">?</span>
-                                                            <span className="font-extrabold text-amber-900 text-sm md:text-base pt-2 leading-snug">旅途試煉</span>
-                                                        </button>
-                                                    )}
                                                 </div>
+                                                <button disabled={gameChances <= 0 || isSpinning} onClick={playWheel} className="absolute inset-0 m-auto w-14 h-14 bg-stone-900 rounded-full border-4 border-white text-white font-black text-xs shadow-lg active:scale-95 disabled:opacity-50">{isSpinning ? '...' : 'SPIN'}</button>
                                             </div>
-                                        ) : (
-                                            <div className="iframe-container">
-                                                <iframe 
-                                                    src={activeSubIndex === 'test' ? currentChapter?.testUrl : currentChapter?.subpages[activeSubIndex].url} 
-                                                    title="Course Content"
-                                                    sandbox="allow-scripts allow-same-origin allow-forms"
-                                                    loading="lazy"
-                                                ></iframe>
+                                        )}
+                                        {activeGame === 'lots' && (
+                                            <div className="text-center">
+                                                <div className={`w-32 h-44 bg-amber-700 rounded-t-3xl rounded-b-lg border-x-8 border-amber-800 mx-auto mb-6 relative flex items-center justify-center shadow-2xl ${isShaking ? 'animate-shake-box' : ''}`}>
+                                                    <div className="w-4 h-4 bg-stone-900 rounded-full absolute -top-2"></div>
+                                                    <span className="text-amber-200 font-black text-4xl opacity-30">SAI</span>
+                                                </div>
+                                                <button disabled={gameChances <= 0 || isShaking} onClick={playLots} className="px-8 py-3 bg-amber-600 text-white rounded-full font-black shadow-lg active:scale-95 disabled:opacity-50">搖動籤筒</button>
+                                            </div>
+                                        )}
+                                        {activeGame === 'scratch' && (
+                                            <div key={gameChances}>
+                                                {gameChances > 0 ? <ScratchCard onWin={(p) => applyGameResult(p)} /> : <div className="text-stone-400 font-bold italic">次數已用完</div>}
                                             </div>
                                         )}
                                     </div>
-                                )}
+                                    {lastPrize !== null && <div className="mt-6 text-center animate-bounce"><div className="inline-block bg-rose-500 text-white px-4 py-2 rounded-full font-black shadow-lg">恭喜獲得 ${lastPrize}！</div></div>}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    <header className="bg-gradient-to-r from-indigo-950 via-stone-900 to-indigo-950 text-white py-5 px-4 text-center shadow-md relative z-10 border-b-4 border-amber-500">
+                        <div className="max-w-4xl mx-auto flex flex-col items-center">
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="bg-white/10 px-3 py-1.5 rounded-full border border-white/20 flex items-center gap-2">
+                                    <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                                    <span className="text-[10px] font-black tracking-widest text-white uppercase">{nickname}</span>
+                                </div>
+                                <div onClick={openGameCenter} className="bg-amber-500 px-3 py-1.5 rounded-full border border-amber-400 flex items-center gap-2 cursor-pointer hover:scale-105 transition-transform">
+                                    <Icon name="gem" size={14} className="text-stone-900" />
+                                    <span className="text-[10px] font-black text-stone-900 uppercase">獎學金: ${scholarship}</span>
+                                    <div className="bg-stone-900 text-amber-500 text-[8px] px-1.5 rounded-full">{gameChances} 次</div>
+                                </div>
+                            </div>
+                            <h1 className="text-xl sm:text-2xl font-black mb-4 tracking-tight">稟軒，引導勝利的神之一手！</h1>
+                            <div className="grid grid-cols-4 gap-1 w-full max-w-sm">
+                                <TimeUnit label="天" value={timeLeft.d} /><TimeUnit label="時" value={timeLeft.h} /><TimeUnit label="分" value={timeLeft.m} /><TimeUnit label="秒" value={timeLeft.s} />
+                            </div>
+                        </div>
+                    </header>
+
+                    <main className="max-w-7xl mx-auto px-2 sm:px-6 py-4 relative z-10">
+                        <div className="grid lg:grid-cols-12 gap-4">
+                            <div className="lg:col-span-4 space-y-4">
+                                <div onClick={() => fetchMomMessage()} className="mom-quote-card p-4 rounded-xl shadow-md border border-rose-100 flex items-start gap-3 cursor-pointer group">
+                                    <div className="bg-rose-500 text-white p-2 rounded-lg shrink-0"><Icon name="heart" size={16} className={isMessageLoading ? "animate-spin" : ""} /></div>
+                                    <p className={`text-sm font-bold text-stone-700 leading-snug ${isMessageLoading ? "opacity-30" : "fade-message"}`}>「{momMessage}」</p>
+                                </div>
+
+                                <div className="glass-card p-4 rounded-2xl border border-stone-800 shadow-sm">
+                                    <h2 className="font-black text-sm mb-3 flex items-center gap-1.5 text-stone-800"><div className="w-3 h-3 rounded-full bg-black"></div> 佈局策略</h2>
+                                    <div className="flex bg-stone-100 rounded-lg p-0.5 mb-3 shadow-inner">
+                                        <button onClick={() => setInputMode("photo")} className={`flex-1 py-1 text-[11px] font-black rounded-md transition-all ${inputMode === "photo" ? 'bg-white text-indigo-700 shadow-sm' : 'text-stone-400'}`}>拍照佈陣</button>
+                                        <button onClick={() => setInputMode("text")} className={`flex-1 py-1 text-[11px] font-black rounded-md transition-all ${inputMode === "text" ? 'bg-white text-indigo-700 shadow-sm' : 'text-stone-400'}`}>文字任務</button>
+                                    </div>
+                                    <form onSubmit={addTask} className="space-y-3">
+                                        <div className="flex flex-wrap gap-1">
+                                            {SUBJECTS.map(s => <button key={s} type="button" onClick={() => setNewCategory(s)} className={`flex-1 min-w-[30%] py-1 text-[10px] font-black rounded transition-all ${newCategory===s?`tag-${s} ring-1 ring-offset-1`:'bg-stone-100 opacity-60'}`}>{s}</button>)}
+                                        </div>
+                                        <input type="date" value={newDate} onChange={e => setNewDate(e.target.value)} className="w-full p-2 rounded-lg border text-xs font-bold" />
+                                        
+                                        {inputMode === 'photo' ? (
+                                            <div className="space-y-2">
+                                                <div className="flex gap-2">
+                                                    <div onClick={() => !isPreCompressing && fileInputRef.current && fileInputRef.current.click()} className="flex-1 p-2 border-2 border-dashed border-stone-300 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-white min-h-[60px]">
+                                                        <Icon name={isPreCompressing ? "loader-2" : "image"} className={isPreCompressing ? "btn-spinner" : ""} /><span className="text-[8px] font-black mt-1">選圖</span>
+                                                        <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileSelect} className="hidden" />
+                                                    </div>
+                                                    <div onClick={startWebcam} className="flex-1 p-2 border-2 border-dashed border-stone-300 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-white min-h-[60px]"><Icon name="camera" /><span className="text-[8px] font-black mt-1">拍攝</span></div>
+                                                </div>
+                                                <div className="max-h-40 overflow-y-auto custom-scroll pr-1 space-y-2">
+                                                    {previewList.map(item => (
+                                                        <div key={item.id} className={`p-1.5 bg-white rounded-lg border flex flex-col gap-1 relative ${shakingItems.includes(item.id) ? 'animate-shake border-red-500' : 'border-stone-200'}`}>
+                                                            <button type="button" onClick={() => setPreviewList(prev => prev.filter(i => i.id !== item.id))} className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-0.5 z-10"><Icon name="x" size={8} /></button>
+                                                            <div className="flex gap-2">
+                                                                <img src={item.dataUrl} className="w-10 h-10 object-cover rounded" />
+                                                                <div className="flex-1 flex gap-1">
+                                                                    <button type="button" onClick={() => setPreviewList(prev => prev.map(i => i.id === item.id ? {...i, qType: 'choice'} : i))} className={`flex-1 py-1 text-[8px] font-black rounded border ${item.qType==='choice'?'bg-stone-800 text-white':'bg-white'}`}>選擇</button>
+                                                                    <button type="button" onClick={() => setPreviewList(prev => prev.map(i => i.id === item.id ? {...i, qType: 'open'} : i))} className={`flex-1 py-1 text-[8px] font-black rounded border ${item.qType==='open'?'bg-stone-800 text-white':'bg-white'}`}>填空</button>
+                                                                </div>
+                                                            </div>
+                                                            {item.qType === 'choice' ? (
+                                                                <div className="flex gap-1">
+                                                                    {["A", "B", "C", "D"].map(c => <button key={c} type="button" onClick={() => setPreviewList(prev => prev.map(i => i.id === item.id ? {...i, answer: c} : i))} className={`flex-1 py-1 rounded text-[10px] font-black transition-all ${item.answer===c?'bg-stone-900 text-white':'bg-stone-100 opacity-40'}`}>{c}</button>)}
+                                                                </div>
+                                                            ) : <input type="text" placeholder="輸入解答..." value={item.answer || ""} onChange={e => setPreviewList(prev => prev.map(i => i.id === item.id ? {...i, answer: e.target.value} : i))} className="w-full p-1 border rounded text-[9px]" />}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ) : <textarea placeholder="輸入任務內容..." value={newTask} onChange={e => setNewTask(e.target.value)} className="w-full p-2 rounded-lg border text-xs font-bold resize-none" rows="2" />}
+                                        <button disabled={isSubmitting} className="w-full py-2.5 bg-stone-900 text-white rounded-lg font-black text-sm active:scale-95 disabled:opacity-50">確認佈局</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div className="lg:col-span-8">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
+                                    <div className="flex bg-stone-200/60 p-1 rounded-xl">
+                                        <button onClick={() => setViewMode('active')} className={`px-4 py-2 rounded-lg text-xs font-black ${viewMode==='active'?'bg-stone-900 text-white':'text-stone-500'}`}>待挑戰 ({counts.active})</button>
+                                        <button onClick={() => setViewMode('history')} className={`px-4 py-2 rounded-lg text-xs font-black ${viewMode==='history'?'bg-stone-900 text-white':'text-stone-500'}`}>戰績榜 ({counts.history})</button>
+                                    </div>
+                                    <div onClick={openGameCenter} className="flex items-center gap-2 bg-rose-500 text-white px-4 py-2 rounded-xl font-black text-xs cursor-pointer animate-pulse"><Icon name="play-circle" size={16} /> 抽獎中心</div>
+                                </div>
+
+                                <div className="flex gap-2 mb-4 overflow-x-auto pb-1 custom-scroll">
+                                    {["全部", ...SUBJECTS].map(s => <button key={s} onClick={() => setSelectedSubject(s)} className={`px-3 py-1.5 rounded-lg text-[10px] font-black whitespace-nowrap transition-all ${selectedSubject===s?`tag-${s==='全部'?'其他':s} ring-2 ring-stone-900 ring-offset-1`:'bg-stone-200 text-stone-600'}`}>{s}</button>)}
+                                </div>
+
+                                <div className="bg-white/95 rounded-2xl border border-stone-100 shadow-sm overflow-hidden divide-y">
+                                    {listToDisplay.map(task => (
+                                        <div key={task.id} className="p-4 flex items-center justify-between group hover:bg-stone-50 transition-colors">
+                                            <div className="flex items-center gap-3">
+                                                <div className="bg-stone-800 text-white text-[10px] font-black w-6 h-6 flex items-center justify-center rounded">#{task.globalIndex}</div>
+                                                <button onClick={() => cycleTaskCategory(task)} className={`px-2 py-0.5 rounded text-[10px] font-black tag-${task.category}`}>{task.category}</button>
+                                                {task.type === 'photo' ? (
+                                                    <img onClick={() => setActiveExamTask(task)} src={task.imageUrl} className="w-10 h-10 object-cover rounded border cursor-zoom-in" />
+                                                ) : <span className={`text-sm font-bold ${task.completed ? "line-through opacity-40" : ""}`}>{task.content}</span>}
+                                                <span className="text-[10px] text-stone-400 font-bold">{task.date}</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                {task.type === 'text' && !task.completed && <button onClick={() => handleTextDone(task)} className="p-2 text-stone-300 hover:text-green-500"><Icon name="check-circle" size={24} /></button>}
+                                                {task.type === 'photo' && !task.completed && <button onClick={() => setActiveExamTask(task)} className="px-3 py-1 bg-indigo-600 text-white text-[10px] font-black rounded-lg">解答</button>}
+                                                {task.completed && <div className="flex items-center gap-1"><span className="text-[9px] font-black text-amber-600">{task.attempts}次</span><Icon name="award" className="text-amber-500" /></div>}
+                                                <button onClick={() => setDeleteTarget(task.id)} className="p-2 text-stone-200 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"><Icon name="trash-2" size={18} /></button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                    {listToDisplay.length === 0 && <div className="p-16 text-center text-stone-400 font-bold italic">目前沒有對局項目</div>}
+                                </div>
                             </div>
                         </div>
                     </main>
 
-                    {isMenuOpen && (
-                        <div className="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-40 md:hidden" onClick={() => setIsMenuOpen(false)}></div>
+                    {activeExamTask && (
+                        <div className="fixed inset-0 z-[8000] bg-black flex flex-col">
+                            <div className="flex-1 relative bg-stone-900 flex items-center justify-center p-2">
+                                <img src={activeExamTask.imageUrl} className="max-w-full max-h-full object-contain" />
+                                <button onClick={() => setActiveExamTask(null)} className="absolute top-4 right-4 text-white p-2 bg-white/10 rounded-full"><Icon name="x" size={24} /></button>
+                            </div>
+                            <div className="bg-stone-900/95 p-6 border-t border-white/10">
+                                <div className="max-w-xl mx-auto grid grid-cols-4 gap-4">
+                                    {["A", "B", "C", "D"].map(c => (
+                                        <button key={c} onClick={() => submitAnswer(activeExamTask, c)} className="py-4 rounded-xl font-black text-xl text-white bg-indigo-600 shadow-[0_4px_0_0_#312e81] active:translate-y-1 active:shadow-none">{c}</button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {aiMessage && (
+                        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[9999] px-8 py-4 rounded-full shadow-2xl font-black text-lg text-white flex items-center gap-3 animate-bounce" style={{ background: aiMessage.status === 'correct' ? '#10b981' : '#ef4444' }}>
+                            <Icon name={aiMessage.status === 'correct' ? "party-popper" : "alert-circle"} size={24} />{aiMessage.text}
+                        </div>
                     )}
                 </div>
             );
